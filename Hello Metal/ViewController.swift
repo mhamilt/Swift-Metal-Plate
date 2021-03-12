@@ -48,7 +48,7 @@ class ViewController: NSViewController
         
         // Set the initial shape to be drawn
         guard let shape = Shape(rawValue: 0) else { return }
-        renderer.model = Model(shape: shape)
+        renderer.model = Model(numberOfGridPoints: 100)
         
         // Get the scale value
         let scale = 1.0 as Float
