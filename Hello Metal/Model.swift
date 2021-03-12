@@ -20,8 +20,9 @@ struct Model
     var vertices: [Vertex]!
     private var plateVertexData: [Vertex?] = []
     var plateInidices:[uint16] = []
-    private let rows: Int = 10
-    private let columns: Int = 10
+    private let rows: Int!
+    private let columns: Int!
+    
     //    private let plateVertexData: [Vertex]
     // The order in which the vertices should be drawn, as triangles
     // Note that by default Metal expects triangles to be described as a clockwise list of vertsices
@@ -32,6 +33,8 @@ struct Model
     
     init(numberOfGridPoints: Int)
     {
+        rows = Int(sqrt(Float(numberOfGridPoints)))
+        columns = rows
         setPlateVerticies()
         self.vertices = (self.plateVertexData as! [Vertex])
         self.indices = self.plateInidices
@@ -56,45 +59,78 @@ struct Model
     
     mutating func setPlateVerticies()
     {
-        self.plateVertexData = [Vertex?](repeating: nil,
-                                         count: rows*columns*6)
+        //        self.plateVertexData = [Vertex?](repeating: nil,
+        //                                         count: rows*columns*6)
         
         let xScale:Float = 2.0/Float(rows)
         let yScale:Float = 2.0/Float(columns)
         
+        //        for y in 0..<columns
+        //        {
+        //            for x in 0..<rows
+        //            {
+        //                let i = (x + y*rows)*6;
+        //
+        //                plateInidices.append(uint16(i) )
+        //                plateVertexData[i] = Vertex(pos: [-1.0 + Float(x)*xScale,
+        //                                                  -1.0 + Float(y)*yScale,
+        //                                                  0],
+        //                                            col: [1.0, 0.0, 0.0])
+        //                plateInidices.append(uint16(i+1))
+        //                plateVertexData[i+1]   = Vertex(pos: [-1.0 + Float(x+1)*xScale,
+        //                                                      -1.0 + Float(y)*yScale,
+        //                                                      0],
+        //                                                col: [0.0, 1.0, 0.0])
+        //                plateInidices.append(uint16(i+2))
+        //                plateVertexData[i+2]   = Vertex(pos: [-1.0 + Float(x)*xScale,
+        //                                                      -1.0 + Float(y+1)*yScale,
+        //                                                      0],
+        //                                                col: [0.0, 0.0, 1.0])
+        //                plateInidices.append(uint16(i+3))
+        //                plateVertexData[i+3]   = plateVertexData[i+1]
+        //                plateInidices.append(uint16(i+4))
+        //                plateVertexData[i+4]   = plateVertexData[i+2]
+        //                plateInidices.append(uint16(i+5))
+        //                plateVertexData[i+5]   = Vertex(pos: [-1.0 + Float(x+1)*xScale,
+        //                                                      -1.0 + Float(y+1)*yScale,
+        //                                                      0],
+        //                                                col: [1.0, 0.0, 0.0])
+        //
+        //            }
+        //        }
+        
+        self.plateVertexData = [Vertex?](repeating: nil,
+                                         count: rows*columns)
         for y in 0..<columns
         {
             for x in 0..<rows
             {
-                let i = (x + y*rows)*6;
+                let i = (x + y*rows);
                 
-                plateInidices.append(uint16(i) )
                 plateVertexData[i] = Vertex(pos: [-1.0 + Float(x)*xScale,
                                                   -1.0 + Float(y)*yScale,
                                                   0],
-                                            col: [1.0, 0.0, 0.0])
-                plateInidices.append(uint16(i+1))
-                plateVertexData[i+1]   = Vertex(pos: [-1.0 + Float(x+1)*xScale,
-                                                      -1.0 + Float(y)*yScale,
-                                                      0],
-                                                col: [0.0, 1.0, 0.0])
-                plateInidices.append(uint16(i+2))
-                plateVertexData[i+2]   = Vertex(pos: [-1.0 + Float(x)*xScale,
-                                                      -1.0 + Float(y+1)*yScale,
-                                                      0],
-                                                col: [0.0, 0.0, 1.0])
-                plateInidices.append(uint16(i+3))
-                plateVertexData[i+3]   = plateVertexData[i+1]
-                plateInidices.append(uint16(i+4))
-                plateVertexData[i+4]   = plateVertexData[i+2]
-                plateInidices.append(uint16(i+5))
-                plateVertexData[i+5]   = Vertex(pos: [-1.0 + Float(x+1)*xScale,
-                                                      -1.0 + Float(y+1)*yScale,
-                                                      0],
-                                                col: [1.0, 0.0, 0.0])
-                
+                                            col: [Float(x)*xScale, Float(y)*yScale, Float(x)*xScale*Float(y)*yScale])
             }
         }
+        let nx = uint16(rows)
+        let xRange = CountableRange<uint16>(uncheckedBounds: (lower: 0, upper: nx-1))
+        
+        for y in 0..<(columns-1)
+        {
+            for xp in xRange
+            {
+                let x:uint16 = xp + uint16(y)*nx
+                plateInidices.append(x)
+                plateInidices.append(x+nx)
+                plateInidices.append(x+1)
+                plateInidices.append(x+1)
+                plateInidices.append(x+nx)
+                plateInidices.append(x+nx+1)
+            }
+        }
+        
+        
     }
     
 }

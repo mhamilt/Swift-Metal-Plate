@@ -10,7 +10,7 @@
 #include <iostream>
 #include "FDPlate.hpp"
 
-const void *makePlate()
+void *makePlate()
 {
     const double sampleRate = 44.1e3;
     FDPlate::PlateParameters plateParams;

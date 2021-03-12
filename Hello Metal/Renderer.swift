@@ -24,11 +24,11 @@ class Renderer: NSObject {
     private let device: MTLDevice
     private let commandQueue: MTLCommandQueue
     private let pipelineState: MTLRenderPipelineState
-    
+    var plate: UnsafeMutableRawPointer! = nil
     // The vertices and indices that will be drawn
     private var vertexBuffer: MTLBuffer?
     private var indexBuffer: MTLBuffer?
-    
+    var colourChange: Float32 = 0.0
     // The model that will be drawn, create the vertex and index buffers when
     // the model is changed
     var model: Model? {
@@ -42,7 +42,7 @@ class Renderer: NSObject {
     var uniforms = Uniforms()
     
     init?(mtkView: MTKView) {
-        
+        plate = makePlate()
         // Get the device for convenience
         guard let tmpDevice = mtkView.device else {
             return nil
@@ -68,6 +68,8 @@ class Renderer: NSObject {
         let aspect = Float(mtkView.bounds.width / mtkView.bounds.height)
         let FOV = (70 / 180) * Float.pi
         uniforms.projectionMatrix = Renderer.createProjectionMatrix(fov: FOV, near: 0.01, far: 100.0, aspect: aspect)
+        
+        
     }
     
     class func createRenderPipeline(mtkView: MTKView) -> MTLRenderPipelineState {
@@ -97,6 +99,9 @@ class Renderer: NSObject {
         let W = lhs ? float4( 0,  0,  z * -near,  0) : float4( 0,  0,  z * near,  0)
         return matrix_float4x4(X, Y, Z, W)
     }
+    func setModel() {
+        self.model = Model(numberOfGridPoints: 1000)
+    }
 }
 
 extension Renderer: MTKViewDelegate {
@@ -112,8 +117,17 @@ extension Renderer: MTKViewDelegate {
         // Create a CommandBuffer and a RenderPassDescriptor
         guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
         guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
-        
+        updateScheme(plate)
         // Check we've got something to draw
+//        if let numVertices = model?.vertices.count
+//        {
+//
+//            for i in 0..<numVertices
+//            {
+//                model!.vertices[i].col = [colourChange,0.0,0.0]
+//            }
+//        }
+        
         guard let vertexBuffer = self.vertexBuffer else { return }
         guard let indexBuffer = self.indexBuffer else { return }
         

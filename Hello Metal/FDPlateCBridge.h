@@ -12,7 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-const void* makePlate();
+void* makePlate();
 
 int     getGridSize     (void* globalPlate);
 float*  getCurrentState (void* globalPlate);
