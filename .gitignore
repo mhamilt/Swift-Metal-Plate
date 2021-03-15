@@ -8,4 +8,5 @@ application.windows32
 application.windows64
 application.macosx
 out
-Hello Metal.xcodeproj/project.xcworkspace/xcuserdata/mhamilt7.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcuserstate
+*.xcworkspacedata
