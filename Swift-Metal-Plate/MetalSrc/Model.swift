@@ -21,7 +21,7 @@ struct Model
     {
         rows = Int(sqrt(Float(numberOfGridPoints)))
         columns = rows
-        setPlateVerticies()
+        setPlateVertices()
         self.vertices = (self.plateVertexData as! [Vertex])
         self.indices = self.plateInidices
         self.count = self.indices.count
@@ -43,7 +43,8 @@ struct Model
         return indexBuffer
     }
     
-    mutating func setPlateVerticies()
+    /// Set up a grid of vertices and organise the order for drawing triangles
+    mutating func setPlateVertices()
     {
         let xScale:Float = 2.0/Float(rows)
         let yScale:Float = 2.0/Float(columns)

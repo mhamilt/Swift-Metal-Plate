@@ -25,7 +25,7 @@
 		589F64AB25FA782200024712 /* FDPlateCBridge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FDPlateCBridge.cpp; sourceTree = "<group>"; };
 		589F64AC25FA782200024712 /* FDPlateCBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FDPlateCBridge.h; sourceTree = "<group>"; };
 		589FB93E25FB64C600D7B84C /* MetalCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalCommon.h; sourceTree = "<group>"; };
-		C3AD46F32292E137002E2837 /* Hello Metal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hello Metal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3AD46F32292E137002E2837 /* Swift-Metal-Plate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift-Metal-Plate.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3AD46F62292E137002E2837 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3AD46F82292E137002E2837 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C3AD46FA2292E13B002E2837 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,10 +50,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58515FCF25FFB06D0068CB83 /* FD-Plate */ = {
+			isa = PBXGroup;
+			children = (
+				589F64AB25FA782200024712 /* FDPlateCBridge.cpp */,
+				589F64AC25FA782200024712 /* FDPlateCBridge.h */,
+				589F64A825FA75DD00024712 /* FDPlate.cpp */,
+				589F64A725FA75DD00024712 /* FDPlate.hpp */,
+			);
+			path = "FD-Plate";
+			sourceTree = "<group>";
+		};
+		58515FD025FFB07E0068CB83 /* MetalSrc */ = {
+			isa = PBXGroup;
+			children = (
+				C3AD47062292FCFA002E2837 /* Renderer.swift */,
+				C3AD470B22930D05002E2837 /* Model.swift */,
+				C3AD470922930345002E2837 /* Shaders.metal */,
+				C3AD470E2293ED85002E2837 /* float4x4.swift */,
+				589FB93E25FB64C600D7B84C /* MetalCommon.h */,
+			);
+			path = MetalSrc;
+			sourceTree = "<group>";
+		};
 		C3AD46EA2292E137002E2837 = {
 			isa = PBXGroup;
 			children = (
-				C3AD46F52292E137002E2837 /* Hello Metal */,
+				C3AD46F52292E137002E2837 /* Swift-Metal-Plate */,
 				C3AD46F42292E137002E2837 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,40 +84,33 @@
 		C3AD46F42292E137002E2837 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C3AD46F32292E137002E2837 /* Hello Metal.app */,
+				C3AD46F32292E137002E2837 /* Swift-Metal-Plate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C3AD46F52292E137002E2837 /* Hello Metal */ = {
+		C3AD46F52292E137002E2837 /* Swift-Metal-Plate */ = {
 			isa = PBXGroup;
 			children = (
-				589F64AB25FA782200024712 /* FDPlateCBridge.cpp */,
-				589F64AC25FA782200024712 /* FDPlateCBridge.h */,
-				589F64A825FA75DD00024712 /* FDPlate.cpp */,
-				589F64A725FA75DD00024712 /* FDPlate.hpp */,
+				58515FD025FFB07E0068CB83 /* MetalSrc */,
+				58515FCF25FFB06D0068CB83 /* FD-Plate */,
 				C3AD46F62292E137002E2837 /* AppDelegate.swift */,
 				C3AD46F82292E137002E2837 /* ViewController.swift */,
-				C3AD47062292FCFA002E2837 /* Renderer.swift */,
-				C3AD470B22930D05002E2837 /* Model.swift */,
-				C3AD470922930345002E2837 /* Shaders.metal */,
-				C3AD470E2293ED85002E2837 /* float4x4.swift */,
 				C3AD4708229302A2002E2837 /* Common.h */,
 				C3AD46FA2292E13B002E2837 /* Assets.xcassets */,
 				C3AD46FC2292E13B002E2837 /* Main.storyboard */,
 				C3AD46FF2292E13B002E2837 /* Info.plist */,
 				C3AD47002292E13B002E2837 /* Hello_Metal.entitlements */,
-				589FB93E25FB64C600D7B84C /* MetalCommon.h */,
 			);
-			path = "Hello Metal";
+			path = "Swift-Metal-Plate";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C3AD46F22292E137002E2837 /* Hello Metal */ = {
+		C3AD46F22292E137002E2837 /* Swift-Metal-Plate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3AD47032292E13B002E2837 /* Build configuration list for PBXNativeTarget "Hello Metal" */;
+			buildConfigurationList = C3AD47032292E13B002E2837 /* Build configuration list for PBXNativeTarget "Swift-Metal-Plate" */;
 			buildPhases = (
 				C3AD46EF2292E137002E2837 /* Sources */,
 				C3AD46F02292E137002E2837 /* Frameworks */,
@@ -104,9 +120,9 @@
 			);
 			dependencies = (
 			);
-			name = "Hello Metal";
+			name = "Swift-Metal-Plate";
 			productName = "Hello Metal";
-			productReference = C3AD46F32292E137002E2837 /* Hello Metal.app */;
+			productReference = C3AD46F32292E137002E2837 /* Swift-Metal-Plate.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -125,7 +141,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C3AD46EE2292E137002E2837 /* Build configuration list for PBXProject "Hello Metal" */;
+			buildConfigurationList = C3AD46EE2292E137002E2837 /* Build configuration list for PBXProject "Swift-Metal-Plate" */;
 			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -138,7 +154,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C3AD46F22292E137002E2837 /* Hello Metal */,
+				C3AD46F22292E137002E2837 /* Swift-Metal-Plate */,
 			);
 		};
 /* End PBXProject section */
@@ -317,7 +333,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.passback.Hello-Metal";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swift-metal-plate.self-sign";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -339,7 +355,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.passback.Hello-Metal";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swift-metal-plate.self-sign";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -348,7 +364,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C3AD46EE2292E137002E2837 /* Build configuration list for PBXProject "Hello Metal" */ = {
+		C3AD46EE2292E137002E2837 /* Build configuration list for PBXProject "Swift-Metal-Plate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3AD47012292E13B002E2837 /* Debug */,
@@ -357,7 +373,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3AD47032292E13B002E2837 /* Build configuration list for PBXNativeTarget "Hello Metal" */ = {
+		C3AD47032292E13B002E2837 /* Build configuration list for PBXNativeTarget "Swift-Metal-Plate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3AD47042292E13B002E2837 /* Debug */,
