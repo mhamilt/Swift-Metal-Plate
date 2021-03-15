@@ -12,7 +12,7 @@ struct Model
     ///    private let plateVertexData: [Vertex]
     /// The order in which the vertices should be drawn, as triangles
     /// Note that by default Metal expects triangles to be described as a clockwise list of vertsices
-    private var indices: [uint16]!
+    private var indices: [uint16]?
     
     /// Number of indices that make up the shape
     var count: Int!
@@ -24,7 +24,7 @@ struct Model
         setPlateVertices()
         self.vertices = (self.plateVertexData as! [Vertex])
         self.indices = self.plateInidices
-        self.count = self.indices.count
+        self.count = try self.indices?.count
     }
     
     /// Convert the vertices to an MTLBuffer on the GPU
@@ -37,11 +37,14 @@ struct Model
     
     /// Convert the indeices to an MTLBuffer on the GPU
     func getIndexBuffer(device: MTLDevice) -> MTLBuffer {
-        guard let indexBuffer = device.makeBuffer(bytes: indices,
-                                                  length: indices.count * MemoryLayout<uint>.stride,
+        guard let indexBuffer = device.makeBuffer(bytes: indices!,
+                                                  length: indices!.count * MemoryLayout<uint16>.size,
                                                   options: []) else {
-            fatalError("Could not create MTLBuffer")
+                                                    fatalError("Could not create MTLBuffer")
         }
+        
+        
+        
         return indexBuffer
     }
     
@@ -50,7 +53,7 @@ struct Model
     {
         let xScale:Float = 2.0/Float(rows)
         let yScale:Float = 2.0/Float(columns)
-                
+        
         self.plateVertexData = [Vertex?](repeating: nil,
                                          count: rows*columns)
         for y in 0..<columns
