@@ -465,6 +465,24 @@ void FDPlate::setOutputFunction (OutputMethod outType)
     }
 }
 
+
+void FDPlate::setRcCoord(float xCoord, float yCoord)
+{
+    ctr[0] = xCoord;
+    ctr[1] = yCoord;
+}
+
+void FDPlate::setRcForce(float force)
+{
+    rcForce = force;
+}
+
+void FDPlate::setRc(float force, float xCoord, float yCoord)
+{
+    setRcCoord(xCoord, yCoord);
+    setRcForce(force);
+}
+
 //==============================================================================
 // Method will set the profile of the input force, for use in JUCE.
 // Currently not interpolated, will need to look into that.
@@ -486,7 +504,7 @@ void FDPlate::setInitialCondition()
             const float Y = yi * h;
             const float dist = sqrt (pow (X - (ctr[0] * Lx),2) + pow (Y - (ctr[1] * Ly),2));
             const float ind = sgn((wid * 0.5) - dist);            // displacement (logical)
-            const float rc = .5 * ind * (1 + cos (2 * pi * dist / wid)); // displacement
+            const float rc = .5 * ind * (1 + cos (2 * pi * dist / wid)) * rcForce; // displacement
             u2[cp] = u0 * rc;
             u1[cp] = v0 * k * rc;
         }

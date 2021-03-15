@@ -25,24 +25,28 @@ struct Uniforms {
     bool wireframe; // Should we render as a white wireframe
 };
 
+constant float scaling = 10.0;
+
 // Pass through vertex shader
 vertex VertexOut vertex_main(const device Vertex *vertexArray [[buffer(0)]],
                              unsigned int vid [[vertex_id]],
-                             constant Uniforms &uniforms [[buffer(1)]])
+                             constant Uniforms &uniforms [[buffer(1)]],
+                             constant float &testValue,
+                             constant float* colourArray)
 {
     Vertex in = vertexArray[vid];
-    
+    float vertexDisplacement = colourArray[vid] * scaling;
     VertexOut out;
     
-    // Multiply the vertex position by the model, view, and projection matrices to position in space
     out.pos = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * float4(in.pos, 1);
-    
-    // If we are drawing as a wireframe, set the colour to white
-    if (uniforms.wireframe) {
-        out.col = float3(1.0, 1.0, 1.0);
-    } else {
-        out.col = in.col;
-    }
+
+    float3 posColour = clamp(vertexDisplacement*float3(1.0, 1.0, 0.0),
+                             float3(0.0, 0.0, 0.0),
+                             float3(4.0, 4.0, 0.0));
+    float3 negColour = clamp((-vertexDisplacement)*float3(0.0, 1.0, 1.0),
+                             float3(0.0, 0.0, 0.0),
+                             float3(0.0, 4.0, 4.0));
+    out.col = posColour + negColour;
     
     return out;
 }

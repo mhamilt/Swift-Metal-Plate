@@ -28,7 +28,8 @@ class Renderer: NSObject {
     // The vertices and indices that will be drawn
     private var vertexBuffer: MTLBuffer?
     private var indexBuffer: MTLBuffer?
-    var colourChange: Float32 = 0.0
+    var colourChange: Float32 = 0.5
+    var colourArray:[Float32]!
     // The model that will be drawn, create the vertex and index buffers when
     // the model is changed
     var model: Model? {
@@ -100,7 +101,9 @@ class Renderer: NSObject {
         return matrix_float4x4(X, Y, Z, W)
     }
     func setModel() {
-        self.model = Model(numberOfGridPoints: 1000)
+        self.model = Model(numberOfGridPoints: Int(getGridSize(plate)))
+        print("Plate Size: ", Int(getGridSize(plate)))
+        getGridSize(plate)
     }
 }
 
@@ -114,19 +117,15 @@ extension Renderer: MTKViewDelegate {
     
     // Called 60 times a second to update the contents of the MTKView
     func draw(in view: MTKView) {
+        colourChange += 0.01;
+        if(colourChange > 1.0){
+            colourChange = 0.0
+        }
         // Create a CommandBuffer and a RenderPassDescriptor
         guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
         guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
         updateScheme(plate)
-        // Check we've got something to draw
-//        if let numVertices = model?.vertices.count
-//        {
-//
-//            for i in 0..<numVertices
-//            {
-//                model!.vertices[i].col = [colourChange,0.0,0.0]
-//            }
-//        }
+
         
         guard let vertexBuffer = self.vertexBuffer else { return }
         guard let indexBuffer = self.indexBuffer else { return }
@@ -141,9 +140,15 @@ extension Renderer: MTKViewDelegate {
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         
         // Not used yet, tell the GPU about the uniforms
-        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
-        renderEncoder.setFragmentBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
         
+        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
+        renderEncoder.setVertexBytes(&colourChange, length: MemoryLayout<Float32>.size, index: 2)
+        
+        updateScheme(plate)
+        
+        renderEncoder.setVertexBytes(getCurrentState(plate),
+                                     length: MemoryLayout<Float>.stride*Int(getGridSize(plate)),
+                                     index: 3)
         // Configure wireframe or fill/solid rendering
         renderEncoder.setTriangleFillMode(uniforms.wireframe ? .lines : .fill)
         

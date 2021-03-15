@@ -17,12 +17,12 @@ void *makePlate()
     plateParams.t60 = .3;
     plateParams.thickness = 0.001;
     plateParams.tone = .5;
-    plateParams.lengthX = .2;
-    plateParams.lengthY = .2;
+    plateParams.lengthX = 0.38;
+    plateParams.lengthY = 0.38;
     plateParams.bcType = FDPlate::BoundaryCondition::simplySupported;
     
     FDPlate* plate = new FDPlate(sampleRate, plateParams);
-    
+    plate->setRc(700.0, 0.33, 0.217);
     plate->setInitialCondition();
     plate->printCoefs();
     plate->printInfo();

@@ -52,7 +52,7 @@ class ViewController: NSViewController
 //        renderer.model = Model(numberOfGridPoints: 100)
         
         // Get the scale value
-        let scale = 1.0 as Float
+        let scale = 2.0 as Float
         
         // Not implemented yet - translation value
         let translation: float3 = [0.0, 0.0, 0.0]

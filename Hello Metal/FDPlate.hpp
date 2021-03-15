@@ -99,6 +99,13 @@ public: // Methods
      sets which function the is used when getting output
      */
     void setOutputFunction(OutputMethod outType);
+    
+    /// set co-ordinate of initial raised cosine
+    /// @param xCoord x-axis co-ordinate
+    /// @param yCoord y-axis co-ordinate
+    void setRcCoord(float xCoord, float yCoord);
+    void setRcForce(float force);
+    void setRc(float force, float xCoord, float yCoord);
     //==========================================================================
     /// get total number of grid points Nx * Ny
     int getGridSize();
@@ -328,6 +335,7 @@ private:
     /** Record amplitude
      */
     float maxRecordAmp = 0.0;
+    float rcForce = 1.0;
 };
 
 #endif /* PlateClasshpp */
