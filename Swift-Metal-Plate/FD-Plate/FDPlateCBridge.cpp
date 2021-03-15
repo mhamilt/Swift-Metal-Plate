@@ -14,15 +14,15 @@ void *makePlate()
 {
     const double sampleRate = 44.1e3;
     FDPlate::PlateParameters plateParams;
-    plateParams.t60 = .3;
+    plateParams.t60 = 1.3;    
     plateParams.thickness = 0.001;
     plateParams.tone = .5;
-    plateParams.lengthX = 0.38;
-    plateParams.lengthY = 0.38;
+    plateParams.lengthX = 0.9;
+    plateParams.lengthY = 0.9;
     plateParams.bcType = FDPlate::BoundaryCondition::simplySupported;
     
     FDPlate* plate = new FDPlate(sampleRate, plateParams);
-    plate->setRc(700.0, 0.33, 0.217);
+    plate->setRc(700.0, 0.13, 0.117);
     plate->setInitialCondition();
     plate->printCoefs();
     plate->printInfo();

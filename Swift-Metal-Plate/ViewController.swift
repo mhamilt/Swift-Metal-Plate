@@ -15,8 +15,8 @@ class ViewController: NSViewController
             fatalError("Could not create default Metal device")
         }
         mtkView.device = defaultDevice
-
-        mtkView.clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        
+        mtkView.clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.2, alpha: 1.0)
                 
         guard let tmpRenderer = Renderer(mtkView: self.mtkView) else {
             fatalError("Could not initialise Renderer class")

@@ -25,7 +25,7 @@ class Renderer: NSObject
     var plate: UnsafeMutableRawPointer! = nil
     var colourChange: Float32 = 0.5
     var colourArray:[Float32]!
-    
+    var stateBuffer: MTLBuffer!
     var model: Model?
     {
         didSet
@@ -87,7 +87,7 @@ class Renderer: NSObject
     func setModel() {
         self.model = Model(numberOfGridPoints: Int(getGridSize(plate)))
         print("Plate Size: ", Int(getGridSize(plate)))
-        getGridSize(plate)
+        stateBuffer = device.makeBuffer(bytes: getCurrentState(plate), length: Int(getGridSize(plate))*4, options: [])
     }
 }
 
@@ -124,9 +124,10 @@ extension Renderer: MTKViewDelegate
         renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
         renderEncoder.setVertexBytes(&colourChange, length: MemoryLayout<Float32>.size, index: 2)
         updateScheme(plate)
-        renderEncoder.setVertexBytes(getCurrentState(plate),
-                                     length: MemoryLayout<Float>.stride*Int(getGridSize(plate)),
-                                     index: 3)
+        stateBuffer = device.makeBuffer(bytes: getCurrentState(plate),
+                                        length: Int(getGridSize(plate))*MemoryLayout<Float32>.size,
+                                        options: [])
+        renderEncoder.setVertexBuffer(stateBuffer, offset: 0, index: 3)
         //----------------------------------------------------------------------
         // Styling
         renderEncoder.setTriangleFillMode(uniforms.wireframe ? .lines : .fill)
