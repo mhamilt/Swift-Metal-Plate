@@ -10,3 +10,4 @@ application.macosx
 out
 *.xcuserstate
 *.xcworkspacedata
+*.xcodeproj/xcuserdata/
