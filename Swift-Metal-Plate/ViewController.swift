@@ -25,7 +25,7 @@ class ViewController: NSViewController
         mtkView.delegate = renderer
         renderer.setModel()
 
-        let scale = 2.0 as Float
+        let scale = 2.2 as Float
         
         let translation: SIMD3<Float> = [0.0, 0.0, 0.0]
         let rx: float_t = 0.0
@@ -35,6 +35,12 @@ class ViewController: NSViewController
         renderer.uniforms.modelMatrix = float4x4.createTransformationMatrix(translation: translation,
                                                                             rx: rx, ry: ry, rz: rz,
                                                                             scale: scale)
+    }
+    
+    override func mouseDown(with event: NSEvent)
+    {
+        super.mouseDown(with: event)        
+        addForce(renderer.plate, 1000.0, Float(event.locationInWindow.y)/600.0, Float(event.locationInWindow.x)/600.0)
     }
 }
 

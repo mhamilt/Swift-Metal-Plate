@@ -37,7 +37,9 @@ struct Model
     
     /// Convert the indeices to an MTLBuffer on the GPU
     func getIndexBuffer(device: MTLDevice) -> MTLBuffer {
-        guard let indexBuffer = device.makeBuffer(bytes: indices, length: indices.count * MemoryLayout<uint>.stride, options: []) else {
+        guard let indexBuffer = device.makeBuffer(bytes: indices,
+                                                  length: indices.count * MemoryLayout<uint>.stride,
+                                                  options: []) else {
             fatalError("Could not create MTLBuffer")
         }
         return indexBuffer

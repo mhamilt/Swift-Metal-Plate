@@ -518,6 +518,25 @@ void FDPlate::addForce (float force)
     u1[li] += d0 * force;
 }
 
+void FDPlate::addForce(float force, float xCoord, float yCoord )
+{
+    setRc(force, xCoord, yCoord);
+    for (int xi = 1; xi < Nx - 1; ++xi)
+      {
+          const float X = xi * h;
+          
+          for (int yi = 1; yi < Ny - 1; ++yi)
+          {
+              const int cp = yi + (xi * Ny);
+              const float Y = yi * h;
+              const float dist = sqrt (pow (X - (ctr[0] * Lx),2) + pow (Y - (ctr[1] * Ly),2));
+              const float ind = sgn((wid * 0.5) - dist);            // displacement (logical)
+              const float rc = .5 * ind * (1 + cos (2 * pi * dist / wid)) * rcForce; // displacement
+              u1[cp] += v0 * k * rc;
+          }
+      }
+}
+
 //==============================================================================
 
 void FDPlate::addStrike()

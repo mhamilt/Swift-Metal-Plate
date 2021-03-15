@@ -87,7 +87,7 @@ class Renderer: NSObject
     func setModel() {
         self.model = Model(numberOfGridPoints: Int(getGridSize(plate)))
         print("Plate Size: ", Int(getGridSize(plate)))
-        stateBuffer = device.makeBuffer(bytes: getCurrentState(plate), length: Int(getGridSize(plate))*4, options: [])
+        stateBuffer = device.makeBuffer(bytes: getCurrentState(plate), length: Int(getGridSize(plate))*4, options: [.storageModeManaged])
     }
 }
 
@@ -124,8 +124,15 @@ extension Renderer: MTKViewDelegate
         renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
         renderEncoder.setVertexBytes(&colourChange, length: MemoryLayout<Float32>.size, index: 2)
         updateScheme(plate)
-        stateBuffer = device.makeBuffer(bytes: getCurrentState(plate),
-                                        length: Int(getGridSize(plate))*MemoryLayout<Float32>.size,
+//        updateScheme(plate)
+//        updateScheme(plate)
+        for i in 0...5
+        {
+                updateScheme(plate)
+        }
+    
+            stateBuffer = device.makeBuffer(bytes: getCurrentState(plate),
+                                        length: Int(getGridSize (plate))*MemoryLayout<Float32>.size,
                                         options: [])
         renderEncoder.setVertexBuffer(stateBuffer, offset: 0, index: 3)
         //----------------------------------------------------------------------

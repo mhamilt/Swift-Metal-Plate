@@ -144,6 +144,9 @@ public: // Methods
      @param force force in Newtons
      */
     void addForce (float force);
+    
+    void addForce (float force, float xCoord, float yCoord);
+    
     /**
      UNDER CONSTRUCTION: will add a strike force to the plate.
      */

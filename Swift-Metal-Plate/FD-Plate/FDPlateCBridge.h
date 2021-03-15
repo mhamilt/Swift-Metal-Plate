@@ -17,6 +17,7 @@ void* makePlate();
 int     getGridSize     (void* globalPlate);
 float*  getCurrentState (void* globalPlate);
 void    updateScheme    (void* globalPlate);
+void    addForce        (void* globalPlate, float force, float xCoord, float yCoord);
 void    destructPlate   (void* globalPlate);
 
 void    bridgetest();
