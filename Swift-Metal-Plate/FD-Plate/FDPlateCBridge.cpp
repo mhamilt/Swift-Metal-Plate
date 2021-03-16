@@ -14,11 +14,11 @@ void *makePlate()
 {
     const double sampleRate = 44.1e3;
     FDPlate::PlateParameters plateParams;
-    plateParams.t60 = 0.03;    
-    plateParams.thickness = 0.001;
+    plateParams.t60 = 0.3;
+    plateParams.thickness = 0.0009;
     plateParams.tone = .5;
-    plateParams.lengthX = 1.59;
-    plateParams.lengthY = 1.59;
+    plateParams.lengthX = 2.59;
+    plateParams.lengthY = 2.59;
     plateParams.bcType = FDPlate::BoundaryCondition::simplySupported;
     
     FDPlate* plate = new FDPlate(sampleRate, plateParams);
@@ -53,7 +53,11 @@ void addForce(void* globalPlate, float force, float xCoord, float yCoord)
     FDPlate& plate = *static_cast<FDPlate*>(globalPlate);
     plate.addForce(force, xCoord, yCoord);
 }
-
+void clearStates(void* globalPlate)
+{
+    FDPlate& plate = *static_cast<FDPlate*>(globalPlate);
+    plate.clearStates();
+}
 void destructPlate(void* globalPlate)
 {
     if(static_cast<FDPlate*>(globalPlate))

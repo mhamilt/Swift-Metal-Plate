@@ -374,6 +374,13 @@ float* FDPlate::getCurrentState()
     return u.get();
 }
 
+void FDPlate::clearStates()
+{
+    std::fill(u.get(),   u.get()+getGridSize(), 0.0);
+    std::fill(u1.get(), u1.get()+getGridSize(), 0.0);
+    std::fill(u2.get(), u2.get()+getGridSize(), 0.0);
+}
+
 float FDPlate::getOutput()
 {
     return (this->*outputFunction)();

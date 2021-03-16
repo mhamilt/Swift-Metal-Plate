@@ -126,7 +126,7 @@ extension Renderer: MTKViewDelegate
         updateScheme(plate)
 //        updateScheme(plate)
 //        updateScheme(plate)
-        for i in 0...5
+        for _ in 0...5
         {
                 updateScheme(plate)
         }
@@ -137,7 +137,7 @@ extension Renderer: MTKViewDelegate
         renderEncoder.setVertexBuffer(stateBuffer, offset: 0, index: 3)
         //----------------------------------------------------------------------
         // Styling
-        renderEncoder.setTriangleFillMode(uniforms.wireframe ? .lines : .fill)
+        renderEncoder.setTriangleFillMode(.fill)
         renderEncoder.drawIndexedPrimitives(type: .triangle,
                                             indexCount: model!.count,
                                             indexType: .uint16,

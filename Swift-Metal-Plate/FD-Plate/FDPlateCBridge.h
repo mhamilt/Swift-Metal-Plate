@@ -19,7 +19,7 @@ float*  getCurrentState (void* globalPlate);
 void    updateScheme    (void* globalPlate);
 void    addForce        (void* globalPlate, float force, float xCoord, float yCoord);
 void    destructPlate   (void* globalPlate);
-
+void    clearStates     (void* globalPlate);
 void    bridgetest();
 #ifdef __cplusplus
 }

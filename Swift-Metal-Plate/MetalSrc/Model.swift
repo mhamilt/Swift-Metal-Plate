@@ -24,7 +24,7 @@ struct Model
         setPlateVertices()
         self.vertices = (self.plateVertexData as! [Vertex])
         self.indices = self.plateInidices
-        self.count = try self.indices?.count
+        self.count = self.indices?.count
     }
     
     /// Convert the vertices to an MTLBuffer on the GPU

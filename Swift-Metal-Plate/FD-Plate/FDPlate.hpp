@@ -115,6 +115,8 @@ public: // Methods
      @return a float point to the current grid state of size Nx * Ny
      */
     float* getCurrentState();
+    /// set all grid state values to 0
+    void clearStates();
     
     //==========================================================================
     /**
