@@ -8,7 +8,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
     {
         if let window = NSApplication.shared.mainWindow
         {
-            window.setContentSize(NSSize(width: 650, height: 650))
+            window.setContentSize(NSSize(width: 700, height: 700))
             window.minSize = NSSize(width: 650, height: 650)
         }
     }
