@@ -16,6 +16,10 @@ A finite difference thin plate visualisation using [Metal](https://developer.app
 - Click to add a raised cosine input force
 - Right click to clear the screen
 
+## Building
+
+Included in the repository is an Xcode project. If you are incredibly lazy, you can [download and open the Xcode project directly from this link](xcode://clone?repo=https%3A%2F%2Fgithub.com%2Fmhamilt%2FSwift-Metal-Plate)
+
 ## About
 
 _Swift Metal Plate_ is based off the [work I was doing for my Masters](https://github.com/mhamilt/CoupledFDPlateAndString) in [Acoustics and Music Techonology at University of Edinburgh / Edinburgh College of Art](http://www.acoustics.ed.ac.uk/amt_msc/).
