@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		585D4B992639C19E005D125B /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 585D4B912639C104005D125B /* MetalKit.framework */; };
 		589F64A925FA75DD00024712 /* FDPlate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 589F64A825FA75DD00024712 /* FDPlate.cpp */; };
 		589F64AD25FA782200024712 /* FDPlateCBridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 589F64AB25FA782200024712 /* FDPlateCBridge.cpp */; };
 		C3AD46F72292E137002E2837 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3AD46F62292E137002E2837 /* AppDelegate.swift */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		585D4B902639C104005D125B /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		585D4B912639C104005D125B /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		589F64A725FA75DD00024712 /* FDPlate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FDPlate.hpp; sourceTree = "<group>"; };
 		589F64A825FA75DD00024712 /* FDPlate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FDPlate.cpp; sourceTree = "<group>"; };
 		589F64AB25FA782200024712 /* FDPlateCBridge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FDPlateCBridge.cpp; sourceTree = "<group>"; };
@@ -44,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				585D4B992639C19E005D125B /* MetalKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,11 +77,21 @@
 			path = MetalSrc;
 			sourceTree = "<group>";
 		};
+		585D4B8F2639C104005D125B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				585D4B902639C104005D125B /* Metal.framework */,
+				585D4B912639C104005D125B /* MetalKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C3AD46EA2292E137002E2837 = {
 			isa = PBXGroup;
 			children = (
 				C3AD46F52292E137002E2837 /* Swift-Metal-Plate */,
 				C3AD46F42292E137002E2837 /* Products */,
+				585D4B8F2639C104005D125B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -325,16 +339,18 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Swift-Metal-Plate/Swift-Metal-Plate.entitlements";
 				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Swift-Metal-Plate/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swift-metal-plate.self-sign";
+				PRODUCT_BUNDLE_IDENTIFIER = com.matthewhamilton.swiftmetalplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Swift-Metal-Plate/Common.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -348,16 +364,18 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Swift-Metal-Plate/Swift-Metal-Plate.entitlements";
 				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Swift-Metal-Plate/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swift-metal-plate.self-sign";
+				PRODUCT_BUNDLE_IDENTIFIER = com.matthewhamilton.swiftmetalplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Swift-Metal-Plate/Common.h";
 				SWIFT_VERSION = 5.0;
 			};

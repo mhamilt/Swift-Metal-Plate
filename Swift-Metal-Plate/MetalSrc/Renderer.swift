@@ -83,11 +83,11 @@ class Renderer: NSObject
         let W = lhs ? SIMD4<Float>( 0,  0,  z * -near,  0) : SIMD4<Float>( 0,  0,  z * near,  0)
         return matrix_float4x4(X, Y, Z, W)
     }
-
+    
     func setModel() {
         self.model = Model(numberOfGridPoints: Int(getGridSize(plate)))
         print("Plate Size: ", Int(getGridSize(plate)))
-        stateBuffer = device.makeBuffer(bytes: getCurrentState(plate), length: Int(getGridSize(plate))*4, options: [.storageModeManaged])
+        stateBuffer = device.makeBuffer(bytes: getCurrentState(plate), length: Int(getGridSize(plate))*4, options: [])
     }
 }
 
@@ -112,26 +112,24 @@ extension Renderer: MTKViewDelegate
     {
         //----------------------------------------------------------------------
         // Stuff We have to do
-        guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
-        guard let renderPassDescriptor = view.currentRenderPassDescriptor else { return }
-        guard let vertexBuffer = self.vertexBuffer else { return }
-        guard let indexBuffer = self.indexBuffer else { return }
-        guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
+        guard let commandBuffer = commandQueue.makeCommandBuffer() else { fatalError("Could not create commandBuffer") }
+        guard let renderPassDescriptor = view.currentRenderPassDescriptor else { fatalError("Could not get renderPassDescriptor") }
+        guard let vertexBuffer = self.vertexBuffer else { fatalError("Could not get vertexBuffer") }
+        guard let indexBuffer = self.indexBuffer else { fatalError("Could not get indexBuffer") }
+        guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { fatalError("Could not create renderEncoder") }
         renderEncoder.setRenderPipelineState(pipelineState)
         //----------------------------------------------------------------------
         // Setting up Uniforms, buffers and vertices
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
         renderEncoder.setVertexBytes(&colourChange, length: MemoryLayout<Float32>.size, index: 2)
-        updateScheme(plate)
-//        updateScheme(plate)
-//        updateScheme(plate)
+        
         for _ in 0...5
         {
-                updateScheme(plate)
+            updateScheme(plate)
         }
-    
-            stateBuffer = device.makeBuffer(bytes: getCurrentState(plate),
+        
+        stateBuffer = device.makeBuffer(bytes: getCurrentState(plate),
                                         length: Int(getGridSize (plate))*MemoryLayout<Float32>.size,
                                         options: [])
         renderEncoder.setVertexBuffer(stateBuffer, offset: 0, index: 3)
