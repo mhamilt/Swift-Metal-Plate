@@ -6,8 +6,8 @@ A finite difference thin plate visualisation using [Metal](https://developer.app
 
 ## Install
 
-- Go to the [Releases](https://github.com/mhamilt/Swift-Metal-Plate/releases/tag/0.1.0a) page
-- download the [`Swift-Metal-Plate.app.zip`](https://github.com/mhamilt/Swift-Metal-Plate/releases/download/0.1.0a/Swift-Metal-Plate.app.zip)
+- Go to the [Releases](https://github.com/mhamilt/Swift-Metal-Plate/releases/tag/0.1.1a) page
+- download the [`Swift-Metal-Plate.app.zip`](https://github.com/mhamilt/Swift-Metal-Plate/releases/download/0.1.1a/Swift-Metal-Plate.app.zip)
 - unzip
 - run the app
 
