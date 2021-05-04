@@ -49,8 +49,7 @@ class ViewController: NSViewController
         super.mouseDown(with: event)
         let width:  Float = Float(self.view.window!.frame.width)
         let height: Float = Float(self.view.window!.frame.height)
-        
-        
+                
         addForce(renderer.plate, 1000.0, Float(event.locationInWindow.y) / height, Float(event.locationInWindow.x) / width)
     }
     
@@ -71,6 +70,11 @@ class ViewController: NSViewController
             addForce(renderer.plate, 1000.0, 0.995, 0.005);
             addForce(renderer.plate, 1000.0, 0.005, 0.995);
             addForce(renderer.plate, 1000.0, 0.995, 0.995);
+        case kVK_ANSI_S:
+            addForce(renderer.plate, 1000.0, 0.5, 0.005);
+            addForce(renderer.plate, 1000.0, 0.5, 0.995);
+            addForce(renderer.plate, 1000.0, 0.995, 0.5);
+            addForce(renderer.plate, 1000.0, 0.005, 0.5);
         default:
             return false
         }

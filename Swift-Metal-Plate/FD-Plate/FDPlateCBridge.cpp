@@ -23,7 +23,7 @@ void *makePlate()
     
     FDPlate* plate = new FDPlate(sampleRate, plateParams);
     plate->setRc(700.0, 0.13, 0.117);
-    plate->setInitialCondition();
+//    plate->setInitialCondition();
     plate->printCoefs();
     plate->printInfo();
     
