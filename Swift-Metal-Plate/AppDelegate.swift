@@ -8,13 +8,19 @@ class AppDelegate: NSObject, NSApplicationDelegate
     {
         if let window = NSApplication.shared.mainWindow
         {
-            window.setContentSize(NSSize(width: 700, height: 700))
-            window.minSize = NSSize(width: 650, height: 650)
+            window.setContentSize(NSSize(width: 500, height: 500))
+            window.minSize = NSSize(width: 450, height: 450)
         }
     }
 
     func applicationWillTerminate(_ aNotification: Notification)
     {
     }
+    
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        NSApplication.shared.terminate(self)
+        return true
+    }
+    
 }
 
